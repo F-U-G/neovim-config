@@ -29,3 +29,8 @@ vim.keymap.set('n', '<Leader>tc', ':tabclose<CR>', {})
 vim.keymap.set('n', '<Leader>tl', ':tabnext<CR>', {})
 vim.keymap.set('n', '<Leader>th', ':tabprevious<CR>', {})
 
+-- lsp keybinds
+vim.keymap.set('n', '<leader>dh', vim.lsp.buf.hover, {})
+vim.keymap.set('n', '<leader>df', vim.lsp.buf.definition, {})
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
+vim.keymap.set("n", "<leader>di", vim.diagnostic.open_float, {})
