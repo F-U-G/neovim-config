@@ -27,7 +27,7 @@ vim.opt.termguicolors = true
 vim.opt.virtualedit = "block"
 
 -- obsidian.nvim, conceal syntax
--- vim.opt.coceallevel = 2
+vim.opt.conceallevel = 1
 
 -- turn of comment continuation
 vim.cmd "autocmd Bufenter * set formatoptions-=cro"

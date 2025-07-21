@@ -6,6 +6,11 @@ return {
       -- require the ones that are not installed through mason
       lspconfig.clangd.setup({})
       lspconfig.pyright.setup({})
+      lspconfig.gdscript.setup {
+        cmd = { "nc", "127.0.0.1", "6005" },
+        filetypes = { "gdscript" },
+        root_dir = lspconfig.util.root_pattern("project.godot", ".git"),
+      }
     end,
   },
   {
@@ -20,11 +25,6 @@ return {
     dependencies = { "mason.nvim" },
     config = function()
       require("mason-lspconfig").setup()
-      require("mason-lspconfig").setup_handlers({
-        function(server_name)
-          require("lspconfig")[server_name].setup({})
-        end,
-      })
     end,
   },
 }

@@ -8,3 +8,6 @@ return {
     })
   end
 }
+
+-- plugin used to color in hex colors
+-- Ex: #cccccc:
