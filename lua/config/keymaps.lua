@@ -34,3 +34,11 @@ vim.keymap.set('n', '<leader>dh', vim.lsp.buf.hover, {})
 vim.keymap.set('n', '<leader>df', vim.lsp.buf.definition, {})
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
 vim.keymap.set("n", "<leader>di", vim.diagnostic.open_float, {})
+
+-- oil.nvim
+vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = "Open parent directory" })
+
+-- word wrap
+vim.keymap.set('n', '<Leader>ww', function()
+  vim.opt.wrap = not vim.opt.wrap:get()
+end, {desc = "toggle word wrap"})
