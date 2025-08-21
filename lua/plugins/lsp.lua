@@ -4,8 +4,9 @@ return {
     config = function()
       local lspconfig = require("lspconfig")
       -- require the ones that are not installed through mason
+      -- must be installed on OS
       lspconfig.clangd.setup({})
-      lspconfig.pyright.setup({})
+      lspconfig.pyright.setup({}) -- npm i -g pyright
       lspconfig.gdscript.setup {
         cmd = { "nc", "127.0.0.1", "6005" },
         filetypes = { "gdscript" },
