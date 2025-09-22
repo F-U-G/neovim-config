@@ -58,3 +58,10 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 vim.diagnostic.config({
   float = { border = "rounded" }
 })
+
+-- godot editor server
+local gdproject = io.open(vim.fn.getcwd()..'/project.godot', 'r')
+if gdproject then
+    io.close(gdproject)
+    vim.fn.serverstart './godothost'
+end

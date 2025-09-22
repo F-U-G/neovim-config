@@ -2,16 +2,21 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      local lspconfig = require("lspconfig")
+      vim.lsp.config(
+        "clangd", {},
+        "pyright", {
+          -- npm i -g pyright
+        },
+        "gdscript", {
+          --cmd = { "nc", "127.0.0.1", "6005" },
+          --filetypes = { "gdscript" },
+          --root_dir = lspconfig.util.root_pattern("project.godot", ".git"),
+        }
+      )
       -- require the ones that are not installed through mason
       -- must be installed on OS
-      lspconfig.clangd.setup({})
-      lspconfig.pyright.setup({}) -- npm i -g pyright
-      lspconfig.gdscript.setup {
-        cmd = { "nc", "127.0.0.1", "6005" },
-        filetypes = { "gdscript" },
-        root_dir = lspconfig.util.root_pattern("project.godot", ".git"),
-      }
+      vim.lsp.enable({"clangd", "pyright", "gdscript"})
+
     end,
   },
   {
