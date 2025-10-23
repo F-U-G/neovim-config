@@ -2,6 +2,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
+      -- These are for the lsp not in Mason and are installed via the OS
       vim.lsp.config(
         "clangd", {},
         "pyright", {
@@ -13,9 +14,12 @@ return {
           --root_dir = lspconfig.util.root_pattern("project.godot", ".git"),
         }
       )
-      -- require the ones that are not installed through mason
-      -- must be installed on OS
-      vim.lsp.enable({"clangd", "pyright", "gdscript"})
+      vim.lsp.config(
+        "tsserver", {
+          cmd = { "typescript-language-server", "--stdio" }
+        }
+      )
+      vim.lsp.enable({"clangd", "pyright", "gdscript", "tsserver"})
 
     end,
   },
