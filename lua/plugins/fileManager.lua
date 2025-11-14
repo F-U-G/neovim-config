@@ -8,4 +8,9 @@ return {
   -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
   -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
   lazy = false,
+  config = function()
+    require('oil').setup()
+    vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Oil, open parent directory' })
+    vim.keymap.set('n', '<leader>sh', require('oil').toggle_hidden, { desc = 'Oil, toggle hidden files' })
+  end
 }

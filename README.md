@@ -2,5 +2,14 @@
 
 ## ToDo
 
-- Add Godot support
-- Better Markdown support for taking notes
+- Docker lsp setup
+- Improve Markdown note taking
+- Typst support
+
+## Learning
+
+- Understand DAP more
+    - setup better keybinds
+- Search and replace
+- surround.nvim
+- Splits
