@@ -22,7 +22,7 @@ vim.keymap.set('n', '<Leader>bl', ':bdelete<CR>', { desc = 'Buffer, delete' })
 vim.keymap.set('n', '<Leader>vs', ':vsplit<CR>', { desc = 'Split, vertical' })
 
 -- tab keybinds
-vim.keymap.set('n', '<Leader>tn', ':tabnew %<CR>', { desc = 'Tab, open new' })
+vim.keymap.set('n', '<Leader>to', ':tabnew %<CR>', { desc = 'Tab, open new' })
 vim.keymap.set('n', '<Leader>tl', ':tabclose<CR>', { desc = 'Tab, close' })
 vim.keymap.set('n', '<A-l>', ':tabnext<CR>', { desc = 'Tab, next' })
 vim.keymap.set('n', '<A-h>', ':tabprevious<CR>', { desc = 'Tab, prev' })
@@ -42,11 +42,29 @@ vim.keymap.set('n', '<leader>di', vim.diagnostic.open_float, { desc = 'lsp diago
 vim.keymap.set('n', '<leader>lm', function() vim.lsp.buf.format() end, { desc = 'Lsp format current buffer' })
 
 -- neotest
-vim.keymap.set("n", "<leader>tn", function() require("neotest").run.run() end, { desc = "Neotest, run nearest test" })
-vim.keymap.set("n", "<leader>tf", function() require("neotest").run.run(vim.fn.expand("%")) end,
-  { desc = "Neotest, run current buffer" })
-vim.keymap.set("n", "<leader>ts", function() require("neotest").output.open({ enter = true }) end,
-  { desc = "Neotest, open test window" })
+vim.keymap.set('n', '<leader>tn', function() require('neotest').run.run() end, { desc = 'Neotest, run nearest test' })
+vim.keymap.set('n', '<leader>tf', function() require('neotest').run.run(vim.fn.expand('%')) end,
+  { desc = 'Neotest, run current buffer' })
+vim.keymap.set('n', '<leader>ts', function() require('neotest').output.open({ enter = true }) end,
+  { desc = 'Neotest, open test window' })
+
+-- dadbod(database)
+vim.keymap.set('n', '<leader>db', function()
+  vim.cmd('tabnew')
+  vim.cmd('DBUI')
+end, { desc = 'dadbod-ui, open dbui' })
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'sql',
+  callback = function()
+    vim.keymap.set('n', '<leader>W', '<Plug>(DBUI_SaveQuery)', {
+      buffer = true,
+      remap = true,
+      silent = true,
+      desc = 'dadbod-ui, save query',
+    })
+  end
+})
 
 -- word wrap
 vim.keymap.set('n', '<Leader>ww', function()

@@ -3,7 +3,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     config = function()
       require("nvim-treesitter.configs").setup({
-        ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "css", "javascript", "html", "python"},
+        ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "css", "javascript", "html", "python" },
         auto_install = true,
         highlight = {
           enable = true,
@@ -38,7 +38,7 @@ return {
             },
             selection_modes = {
               ['@parameter.outer'] = 'v', -- charwise
-              ['@function.outer'] = 'v', -- linewise
+              ['@function.outer'] = 'v',  -- linewise
               ['@class.outer'] = '<c-v>', -- blockwise
             },
             include_surrounding_whitespace = true,
