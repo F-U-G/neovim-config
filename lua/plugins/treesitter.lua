@@ -1,8 +1,12 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+  },
+  {
+    "MeanderingProgrammer/treesitter-modules.nvim",
     config = function()
-      require("nvim-treesitter.configs").setup({
+      require("treesitter-modules").setup({
         ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "css", "javascript", "html", "python", "java" },
         auto_install = true,
         highlight = {
@@ -17,37 +21,45 @@ return {
             scope_incremental = "<Leader>pc",
             node_decremental = "<Leader>pj",
           },
-        },
-        textobjects = {
-          select = {
-            enable = true,
-
-            -- Automatically jump forward to textobj, similar to targets.vim
-            lookahead = true,
-
-            keymaps = {
-              -- You can use the capture groups defined in textobjects.scm
-              ["af"] = "@function.outer",
-              ["if"] = "@function.inner",
-              ["ac"] = "@class.outer",
-              -- You can optionally set descriptions to the mappings (used in the desc parameter of
-              -- nvim_buf_set_keymap) which plugins like which-key display
-              ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-              -- You can also use captures from other query groups like `locals.scm`
-              ["as"] = { query = "@local.scope", query_group = "locals", desc = "Select language scope" },
-            },
-            selection_modes = {
-              ['@parameter.outer'] = 'v', -- charwise
-              ['@function.outer'] = 'v',  -- linewise
-              ['@class.outer'] = '<c-v>', -- blockwise
-            },
-            include_surrounding_whitespace = true,
-          },
-        },
+        }
       })
-    end,
+    end
   },
   {
-    "nvim-treesitter/nvim-treesitter-textobjects"
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
+    config = function()
+      require("nvim-treesitter-textobjects").setup({
+        select = {
+          enable = true,
+          -- Automatically jump forward to textobj, similar to targets.vim
+          lookahead = true,
+
+          selection_modes = {
+            ['@parameter.outer'] = 'v',   -- charwise
+            ['@function.outer'] = 'v',    -- linewise
+            ['@class.outer'] = '<c-v>',   -- blockwise
+          },
+          include_surrounding_whitespace = true,
+        }
+      })
+
+      local select = require("nvim-treesitter-textobjects.select").select_textobject
+      vim.keymap.set({ "x", "o" }, "af", function()
+        select("@function.outer", "textobjects")
+      end, { desc = "Outer function select" })
+      vim.keymap.set({ "x", "o" }, "if", function()
+        select("@function.inner", "textobjects")
+      end, { desc = "In funciton select" })
+      vim.keymap.set({ "x", "o" }, "ac", function()
+        select("@class.outer", "textobjects")
+      end, { desc = "Select outer class" })
+      vim.keymap.set({ "x", "o" }, "ic", function()
+        select("@class.inner", "textobjects")
+      end, { desc = "Select inner class" } )
+      vim.keymap.set({ "x", "o" }, "as", function()
+        select("@local.scope", "textobjects")
+      end, { desc = "Select scope" } )
+    end
   }
 }

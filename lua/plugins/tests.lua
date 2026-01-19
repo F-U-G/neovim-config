@@ -8,6 +8,13 @@ return {
       "nvim-treesitter/nvim-treesitter",
       "nvim-neotest/neotest-jest",
     },
+
+    keys = {
+      { "<leader>tn", mode = { "n" }},
+      { "<leader>tf", mode = { "n" }},
+      { "<leader>ts", mode = { "n" }}
+    },
+
     config = function()
       require("neotest").setup({
         adapters = {

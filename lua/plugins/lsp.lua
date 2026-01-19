@@ -68,7 +68,7 @@ return {
         }
       )
       vim.lsp.enable({ 'tailwindcss', 'cssls', 'biome', 'lua_ls', 'clangd', 'pyright', 'gdscript', 'ts_ls', 'eslint',
-        'html', 'docker_compose_language_service', 'prismals', 'bashls', 'jdtls' })
+        'html', 'docker_compose_language_service', 'bashls', 'jdtls' })
     end,
   },
   {
