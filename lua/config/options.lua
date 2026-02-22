@@ -44,24 +44,13 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- borders for hover menus
--- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
---   vim.lsp.handlers.hover,
---   { border = "rounded" }
--- )
---
--- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
---   vim.lsp.handlers.signature_help,
---   { border = "rounded" }
--- )
-
 vim.diagnostic.config({
   float = { border = "rounded" }
 })
 
 -- godot editor server
-local gdproject = io.open(vim.fn.getcwd()..'/project.godot', 'r')
+local gdproject = io.open(vim.fn.getcwd() .. '/project.godot', 'r')
 if gdproject then
-    io.close(gdproject)
-    vim.fn.serverstart './godothost'
+  io.close(gdproject)
+  vim.fn.serverstart './godothost'
 end
