@@ -8,6 +8,19 @@ return {
         command = "gdb",
         args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
       }
+      -- dap.configurations.cpp = {
+      --   {
+      --     name = "Launch",
+      --     type = "gdb",
+      --     request = "launch",
+      --     program = function()
+      --       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+      --     end,
+      --     cwd = "${workspaceFolder}",
+      --     --stopAtEntry = true,
+      --     stopAtBeginningOfMainSubprogram = true,
+      --   },
+      -- }
       dap.configurations.cpp = {
         {
           name = "Launch",
@@ -16,17 +29,43 @@ return {
           program = function()
             return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
           end,
+          args = {}, -- provide arguments if needed
           cwd = "${workspaceFolder}",
-          --stopAtEntry = true,
-          stopAtBeginningOfMainSubprogram = true,
+          stopAtBeginningOfMainSubprogram = false,
         },
+        {
+          name = "Select and attach to process",
+          type = "gdb",
+          request = "attach",
+          program = function()
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+          end,
+          pid = function()
+            local name = vim.fn.input('Executable name (filter): ')
+            return require("dap.utils").pick_process({ filter = name })
+          end,
+          cwd = '${workspaceFolder}'
+        },
+        {
+          name = 'Attach to gdbserver :1234',
+          type = 'gdb',
+          request = 'attach',
+          target = 'localhost:1234',
+          program = function()
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+          end,
+          cwd = '${workspaceFolder}'
+        }
       }
+      dap.configurations.c = dap.configurations.cpp
+
       vim.keymap.set('n', '<Leader>b', function() require("dap").toggle_breakpoint() end)
-      vim.keymap.set('n', '<Leader>B', function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end)
       vim.keymap.set('n', '<Leader>c', function() require("dap").continue() end)
       vim.keymap.set('n', '<Leader>so', function() require("dap").step_over() end)
       vim.keymap.set('n', '<Leader>si', function() require("dap").step_into() end)
       vim.keymap.set('n', '<Leader>su', function() require("dap").step_out() end)
+      vim.keymap.set('n', '<Leader>sb', function() require("dap").step_back() end)
+      vim.keymap.set('n', '<Leader>dr', function() require("dap").restart() end)
     end
   },
   {
