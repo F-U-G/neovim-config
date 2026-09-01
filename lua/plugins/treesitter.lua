@@ -9,6 +9,7 @@ return {
         "python",
         "c",
         "cpp",
+        "r",
         "lua",
         "java",
         "vim",
